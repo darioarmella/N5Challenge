@@ -34,7 +34,7 @@ namespace Core.CQRS.Handlers
 			await repo.AddAsync(permission);
 			await _unitOfWork.SaveChangesAsync();
 
-			// Indexar en Elasticsearch
+			//Indexar en Elasticsearch
 			await _elasticsearchService.IndexPermissionAsync(permission);
 
 			return new PermissionDto

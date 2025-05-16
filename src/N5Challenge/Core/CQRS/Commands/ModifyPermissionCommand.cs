@@ -3,6 +3,6 @@ using MediatR;
 
 namespace Core.CQRS.Commands
 {
-	public record RequestPermissionCommand(CreatePermissionDto PermissionDto)
+	public record ModifyPermissionCommand(UpdatePermissionDto PermissionDto)
 	: IRequest<PermissionDto>;
 }
