@@ -1,4 +1,5 @@
 using Core.CQRS.Commands;
+using Core.Depedencies;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Services;
@@ -30,6 +31,7 @@ builder.Services.AddSingleton<IElasticSearchService>(new ElasticSearchService(el
 
 // MediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RequestPermissionCommand).Assembly));
+builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfile>());
 
 var app = builder.Build();
 
