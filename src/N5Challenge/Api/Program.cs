@@ -29,8 +29,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 // Elasticsearch
-var elasticsearchUri = builder.Configuration["ElasticSearch:Uri"];
-builder.Services.AddSingleton<IElasticSearchService>(new ElasticSearchService(elasticsearchUri));
+//var elasticsearchUri = builder.Configuration["ElasticSearch:Uri"];
+builder.Services.AddSingleton<IElasticSearchService, ElasticSearchService>();
 
 // MediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RequestPermissionCommand).Assembly));

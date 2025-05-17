@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Interfaces.Services;
+using Microsoft.Extensions.Configuration;
 using Nest;
 
 namespace Core.Services
@@ -8,11 +9,13 @@ namespace Core.Services
 	{
 		private readonly ElasticClient _client;
 		private const string IndexName = "permissions";
+		private readonly IConfiguration _configuration;
 
-		public ElasticSearchService(string uri)
+		public ElasticSearchService(IConfiguration configuration)
 		{
-			var settings = new ConnectionSettings(new Uri(uri))
-				.DefaultIndex(IndexName);
+			_configuration = configuration;
+			var uri = _configuration.GetSection("Elasticsearch").GetSection("Uri").Value;
+			var settings = new ConnectionSettings(new Uri(uri)).DefaultIndex(IndexName);
 			_client = new ElasticClient(settings);
 		}
 
