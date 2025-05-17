@@ -7,9 +7,12 @@ using Infrastructure.Data;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseSerilog(((ctx, lc) => lc.ReadFrom.Configuration(ctx.Configuration)));
+builder.Services.AddLogging();
 // Add services to the container.
 
 builder.Services.AddControllers();
